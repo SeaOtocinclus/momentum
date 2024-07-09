@@ -14,9 +14,9 @@ message("[DEBUG] CONDA_PREFIX: $ENV{CONDA_PREFIX}")
 
 # Define the specific Python version directories
 set(PYTHON_DIRS
-  $ENV{CONDA_PREFIX}/lib/python3.12/site-packages/torch/lib/
-  $ENV{CONDA_PREFIX}/lib/python3.11/site-packages/torch/lib/
-  $ENV{CONDA_PREFIX}/lib/python3.10/site-packages/torch/lib/
+  $ENV{CONDA_PREFIX}/lib/python3.12
+  $ENV{CONDA_PREFIX}/lib/python3.11
+  $ENV{CONDA_PREFIX}/lib/python3.10
 )
 # Loop through each directory and list its contents
 foreach(PYTHON_DIR ${PYTHON_DIRS})
@@ -30,6 +30,7 @@ endforeach()
 find_library(torch_python
   NAMES torch_python
   HINTS ${PYTHON_DIRS}
+  PATH_SUFFIXES site-packages/torch/lib
   REQUIRED
 )
 
