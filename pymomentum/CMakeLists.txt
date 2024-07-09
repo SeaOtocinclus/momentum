@@ -10,9 +10,26 @@
 find_package(ATen CONFIG REQUIRED)
 find_package(Torch CONFIG REQUIRED)
 
+message("[DEBUG] CONDA_PREFIX: $ENV{CONDA_PREFIX}")
+
+# Define the specific Python version directories
+set(PYTHON_DIRS
+  $ENV{CONDA_PREFIX}/lib/python3.12/site-packages/torch/lib/
+  $ENV{CONDA_PREFIX}/lib/python3.11/site-packages/torch/lib/
+  $ENV{CONDA_PREFIX}/lib/python3.10/site-packages/torch/lib/
+)
+# Loop through each directory and list its contents
+foreach(PYTHON_DIR ${PYTHON_DIRS})
+  message(STATUS "Checking contents of ${PYTHON_DIR}:")
+  file(GLOB CONTENTS "${PYTHON_DIR}/*")
+  foreach(CONTENT ${CONTENTS})
+    message(STATUS "  ${CONTENT}")
+  endforeach()
+endforeach()
+# Find the library in the specified directories
 find_library(torch_python
   NAMES torch_python
-  HINTS $ENV{CONDA_PREFIX}/lib/python3.12/site-packages/torch/lib/
+  HINTS ${PYTHON_DIRS}
   REQUIRED
 )
 
