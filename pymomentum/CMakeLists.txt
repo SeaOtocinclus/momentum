@@ -27,7 +27,7 @@ foreach(PYTHON_DIR ${PYTHON_DIRS})
   endforeach()
 endforeach()
 # Find the library in the specified directories
-find_library(torch_python
+find_library(TORCH_PYTHON_LIBRARY
   NAMES torch_python
   HINTS ${PYTHON_DIRS}
   PATH_SUFFIXES site-packages/torch/lib
@@ -98,7 +98,7 @@ mt_library(
     Dispenso::dispenso
     Eigen3::Eigen
     ${TORCH_LIBRARIES}
-    ${torch_python}
+    ${TORCH_PYTHON_LIBRARY}
   PUBLIC_COMPILE_OPTIONS
     ${TORCH_CXX_FLAGS}
   EXCLUDE_FROM_INSTALL
@@ -125,7 +125,7 @@ mt_python_binding(
     tensor_utility
     ${ATEN_LIBRARIES}
     ${TORCH_LIBRARIES}
-    ${torch_python}
+    ${TORCH_PYTHON_LIBRARY}
   COMPILE_OPTIONS
     ${TORCH_CXX_FLAGS}
 )
@@ -141,7 +141,7 @@ mt_python_binding(
     tensor_momentum
     ${ATEN_LIBRARIES}
     ${TORCH_LIBRARIES}
-    ${torch_python}
+    ${TORCH_PYTHON_LIBRARY}
   COMPILE_OPTIONS
     ${TORCH_CXX_FLAGS}
 )
@@ -157,7 +157,7 @@ mt_python_binding(
     tensor_momentum
     ${ATEN_LIBRARIES}
     ${TORCH_LIBRARIES}
-    ${torch_python}
+    ${TORCH_PYTHON_LIBRARY}
   COMPILE_OPTIONS
     ${TORCH_CXX_FLAGS}
 )
